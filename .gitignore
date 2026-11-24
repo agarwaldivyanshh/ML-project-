@@ -22,3 +22,7 @@ env/
 
 # Binaries
 bin/
+
+# Static vendor bundles
+static/
+
