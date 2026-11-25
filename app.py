@@ -300,8 +300,15 @@ p, span, label, div {
     border-color: #334155 !important;
 }
 
-/* Hide default streamlit branding */
-footer, header, #MainMenu { visibility: hidden !important; }
+/* Hide default streamlit footer/menu while keeping sidebar toggle button visible */
+footer, #MainMenu { visibility: hidden !important; }
+header[data-testid="stHeader"] {
+    background: transparent !important;
+}
+[data-testid="stExpandSidebarButton"] {
+    visibility: visible !important;
+    color: #0F172A !important;
+}
 </style>
 """
 st.markdown(SAAS_CSS, unsafe_allow_html=True)
