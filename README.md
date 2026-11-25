@@ -1,5 +1,10 @@
 # Graph-Based Fraud Detection in Banking Transactions
 
+[![Live App](https://img.shields.io/badge/Live%20Demo-Streamlit%20Cloud-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://fin-graph.streamlit.app/)
+
+> **Live Deployed Dashboard:** **[https://fin-graph.streamlit.app/](https://fin-graph.streamlit.app/)**  
+> **Course:** UML501 — Machine Learning | **Team:** Divyansh Agarwal (`1024030523`), Mudit Agarwal (`1024030526`)
+
 A machine learning and network analytics project that detects organized money laundering and multi-hop mule rings in banking transaction logs using Graph Neural Networks (GraphSAGE and GAT) compared against tabular baselines (XGBoost and Random Forest).
 
 ## Overview
@@ -44,9 +49,20 @@ python3 pipeline/train_gnn.py
 pytest tests/
 ```
 
+## Documentation & Presentation
+
+All project documentation is located in the [`doc/`](./doc/) folder:
+- **Mini Project Report (PDF):** [`doc/UML501_Mini_Project_Report.pdf`](./doc/UML501_Mini_Project_Report.pdf)
+- **Mini Project Report (Word):** [`doc/UML501_Mini_Project_Report.docx`](./doc/UML501_Mini_Project_Report.docx)
+- **Project Slides (PDF):** [`doc/Presentation_Slides.pdf`](./doc/Presentation_Slides.pdf)
+
 ## Repository Structure
 ```text
 ├── app.py                     # Streamlit dashboard application
+├── doc/
+│   ├── Presentation_Slides.pdf        # Project presentation slides
+│   ├── UML501_Mini_Project_Report.pdf # 7-page mini project report (PDF)
+│   └── UML501_Mini_Project_Report.docx# 7-page mini project report (DOCX)
 ├── data/
 │   ├── prepare_data.py        # PaySim preprocessing & PyG graph builder
 │   └── demo_scenarios.pkl     # Pre-extracted investigation subgraphs
