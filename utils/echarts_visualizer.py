@@ -1,15 +1,8 @@
 """
-Apache ECharts Graph Visualizer for Banking Fraud Detection.
-Replaces confusing clumped layouts with structured financial pipelines:
-- Case A: Multi-Hop Mule Ring Pipeline (Slide 2 - The $4,500 Single Transfer Illusion)
-- Case B: Smurfing Fan-Out & Re-aggregation (1 -> 6 -> 1)
-- Case C: Verified Commercial Merchant Flow (Customers -> Merchant -> Suppliers)
-
-Includes:
-- Locked mouse-wheel zoom (no scrolling interference)
-- Rich floating zoom & fit buttons at bottom right
-- Rich glassmorphism tooltips for nodes and edges
-- High-contrast enterprise color palette
+Apache ECharts graph layout builder for banking transaction networks:
+- Case A: Multi-hop mule ring pipeline
+- Case B: Smurfing fan-out & offshore re-aggregation
+- Case C: Legitimate commercial merchant network
 """
 
 from typing import Dict, Any, List

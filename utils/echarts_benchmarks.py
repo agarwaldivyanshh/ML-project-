@@ -1,6 +1,5 @@
 """
-ECharts specifications for Model Benchmarks, Radar Analysis, and PaySim Graph Topology.
-Emulates the exact high-end visual language of the official Streamlit ECharts Gallery.
+ECharts chart configurations for model benchmarks, capability radar, and temporal volume.
 """
 
 from typing import Dict, Any

@@ -19,10 +19,3 @@ env/
 
 # Streamlit local state
 .streamlit/secrets.toml
-
-# Binaries
-bin/
-
-# Static vendor bundles
-static/
-

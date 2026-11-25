@@ -9,12 +9,10 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-# ============================================================
-# PAGE CONFIGURATION - ENTERPRISE SAAS DASHBOARD
-# ============================================================
+# Page configuration
 st.set_page_config(
     page_title="FinGraph AML | Graph-Based Fraud Detection",
-    page_icon="🛡️",
+    page_icon=":material/account_tree:",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -34,10 +32,7 @@ from utils.echarts_benchmarks import (
 )
 from models.explainer import FraudGraphExplainer
 
-# ============================================================
-# HIGH-END SAAS DESIGN SYSTEM (Work Sans / Plus Jakarta Sans)
-# Inspired by andfanilo/streamlit-echarts and the Streamlit Design System
-# ============================================================
+# Layout & typography styles
 SAAS_CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
@@ -327,17 +322,12 @@ def load_app_assets():
 
 scenarios, benchmarks, explainer = load_app_assets()
 
-# ============================================================
-# SIDEBAR - DARK SLATE THEME (ECharts Gallery Reference)
-# ============================================================
+# Sidebar
 with st.sidebar:
     st.markdown("""
-    <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #334155;">
-        <span style="font-size:2rem;">🛡️</span>
-        <div>
-            <div style="font-weight:800; font-size:1.15rem; color:#F8FAFC; line-height:1.2;">FinGraph AML</div>
-            <div style="font-size:0.75rem; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Banking Intelligence</div>
-        </div>
+    <div style="margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #334155;">
+        <div style="font-weight:800; font-size:1.2rem; color:#F8FAFC; line-height:1.2;">FinGraph AML</div>
+        <div style="font-size:0.75rem; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin-top:2px;">Transaction Graph Analytics</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -346,7 +336,7 @@ with st.sidebar:
     <div style="background:#334155; border:1px solid #475569; border-radius:10px; padding:12px 14px; margin-bottom:20px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
             <span style="height:9px; width:9px; background:#10B981; border-radius:50%; display:inline-block;"></span>
-            <b style="font-size:0.86rem; color:#F8FAFC;">4 Models Synchronized</b>
+            <b style="font-size:0.86rem; color:#F8FAFC;">4 Models Active</b>
         </div>
         <div style="font-size:0.76rem; color:#CBD5E1; line-height:1.5;">
             • GAT (Graph Attention Network)<br>
@@ -363,41 +353,29 @@ with st.sidebar:
         <div style="font-weight:700; font-size:0.84rem; color:#F8FAFC; margin-bottom:4px;">PaySim Financial Simulator</div>
         <div style="font-size:0.78rem; color:#CBD5E1; line-height:1.5;">
             <b>Scale:</b> 6.36 Million transactions<br>
-            <b>Fraud Ratio:</b> 0.13% (Severe Imbalance)<br>
-            <b>Target Types:</b> TRANSFER & CASH_OUT<br>
+            <b>Fraud Ratio:</b> 0.13% (Class Imbalance)<br>
+            <b>Target Types:</b> TRANSFER &amp; CASH_OUT<br>
             <b>Graph Entities:</b> 115,836 Nodes • 61,182 Edges
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("### Investigation Filter")
-    selected_view = st.radio(
-        "Default Mode:",
-        ["Pipeline Flow (Recommended)", "Interactive Force Network"],
-        index=0
-    )
-
     st.markdown("---")
-    st.markdown("<div style='font-size:0.76rem; color:#64748B; text-align:center;'>ML Semester Project • SEM 5<br>Powered by PyTorch Geometric & ECharts</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size:0.76rem; color:#94A3B8; text-align:center;'>ML Semester Project • PyTorch Geometric</div>", unsafe_allow_html=True)
 
-# ============================================================
-# HERO HEADER SECTION
-# ============================================================
+# Hero header
 st.markdown("""
 <div class="hero-card">
-    <div class="hero-pill">Machine Learning Semester Project</div>
+    <div class="hero-pill">ML Semester Project</div>
     <div class="hero-title">Graph-Based Fraud Detection in Banking Transactions</div>
     <div class="hero-subtitle">
-        Catching organized money laundering and multi-hop sleeper mule rings by modeling bank accounts 
-        and fund flows as an interconnected directed graph rather than isolated tabular rows.
+        Detecting organized money laundering and multi-hop mule rings by modeling bank accounts 
+        and fund flows as a directed transaction graph rather than isolated tabular rows.
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# ============================================================
-# TOP KPI ROW WITH NATIVE STREAMLIT SPARKLINES
-# Direct replica of andfanilo/streamlit-echarts-demo KPI cards
-# ============================================================
+# Top KPI metrics
 col_kpi1, col_kpi2, col_kpi3, col_kpi4 = st.columns(4)
 
 with col_kpi1:
@@ -440,15 +418,13 @@ with col_kpi4:
         chart_type="area"
     )
 
-# ============================================================
-# MAIN APPLICATION TABS
-# ============================================================
+# Main tabs
 tab_investigate, tab_benchmarks, tab_topology, tab_sandbox, tab_architecture = st.tabs([
-    "🔍 Forensic Investigation",
-    "📊 Model Benchmarks (Slide 7)",
-    "🕸️ PaySim Graph Topology",
-    "🧪 Stress-Test Sandbox",
-    "📑 Pipeline & Methodology"
+    "Forensic Investigation",
+    "Model Benchmarks",
+    "Graph Topology",
+    "Transaction Sandbox",
+    "Architecture & Pipeline"
 ])
 
 # ============================================================
@@ -484,13 +460,12 @@ with tab_investigate:
         txt_dilemma_tabular = "A high-volume merchant receives hundreds of customer payments daily. Tabular rules often raise false alarms due to sheer transaction velocity."
         txt_dilemma_graph = "Graph topology shows a natural star-shaped commercial network with healthy balance retention and 0% structural collusion with identified mule clusters."
 
-    # Dilemma Comparison Card (Slide 2 Direct Replica)
     st.markdown(f"""
     <div class="dilemma-card">
         <div class="dilemma-grid">
             <div class="dilemma-col-red">
                 <div class="dilemma-header" style="color:#B91C1C;">
-                    <span>❌</span> <span>WHAT ROW-BY-ROW MODELS SEE (The Single Transfer Illusion)</span>
+                    <span>Row-Level View (Single Transfer Illusion)</span>
                 </div>
                 <div style="font-size:0.92rem; color:#450A0A; line-height:1.6;">
                     {txt_dilemma_tabular}
@@ -498,7 +473,7 @@ with tab_investigate:
             </div>
             <div class="dilemma-col-green">
                 <div class="dilemma-header" style="color:#15803D;">
-                    <span>✅</span> <span>WHAT OUR GRAPH APPROACH SEES (The Multi-Hop Mule Ring Reality)</span>
+                    <span>Graph Network View (Multi-Hop Ring Reality)</span>
                 </div>
                 <div style="font-size:0.92rem; color:#052E16; line-height:1.6;">
                     {txt_dilemma_graph}
@@ -512,25 +487,22 @@ with tab_investigate:
     target_account = active_sc['target_account']
     audit = explainer.explain_account(target_account, scenario_data=active_sc)
 
-    # Two-Column Layout: Visual Network (Left) & Model Comparison (Right)
     col_graph, col_verdicts = st.columns([1.5, 1.1])
 
     with col_graph:
-        st.markdown(f"#### 🕸️ Directed Transaction Network (`{target_account}`)")
-        st.caption("Clean left-to-right flow pipeline • Hover nodes & edges for forensic telemetry • Use bottom toolbar to zoom & fit")
+        st.markdown(f"#### Directed Transaction Network (`{target_account}`)")
+        st.caption("Left-to-right flow pipeline • Hover nodes & edges for transfer details • Use bottom toolbar to zoom & fit")
 
-        # Build ECharts Graph Option (Clean Pipeline, Locked Wheel Scroll, Zoom Controls)
         graph_option = get_echarts_graph_option(
             scenario_id=active_sc_id,
             scenario_data=active_sc,
             highlight_node=target_account
         )
 
-        # Render with floating bottom zoom toolbar
         render_echarts(graph_option, height="520px", show_controls=True, chart_id=f"net_{active_sc_id}")
 
     with col_verdicts:
-        st.markdown("#### ⚖️ Side-by-Side Model Verdicts")
+        st.markdown("#### Model Verdicts")
 
         preds = audit['predictions']
         for model_name, info in preds.items():
@@ -560,11 +532,10 @@ with tab_investigate:
             st.progress(float(prob))
             st.markdown("</div>", unsafe_allow_html=True)
 
-        # Explainable AI (Why It Flagged - Slide 3)
         st.markdown(f"""
         <div class="audit-container">
-            <div style="font-weight:800; font-size:1.02rem; color:#0F172A; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
-                <span>🛡️</span> <span>Explainable Flagging (Why It Flagged — Slide 3)</span>
+            <div style="font-weight:800; font-size:1.02rem; color:#0F172A; margin-bottom:8px;">
+                Explainable Flagging (Audit Summary)
             </div>
             <div style="font-style:italic; font-size:0.92rem; color:#B45309; font-weight:600; line-height:1.5; margin-bottom:12px; padding-left:12px; border-left:3px solid #D97706;">
                 "{audit['summary']}"
@@ -686,9 +657,9 @@ with tab_topology:
 # ============================================================
 with tab_sandbox:
     st.markdown("### Transaction Stress-Test Sandbox")
-    st.caption("Test ordinary and un-ordinary transaction values, extreme edge cases, and neighborhood mule densities live.")
+    st.caption("Test custom or extreme transaction amounts, edge cases, and neighborhood mule densities live.")
 
-    st.markdown("##### ⚡ Quick 1-Click Test Scenarios:")
+    st.markdown("##### Quick Test Presets:")
     p1, p2, p3, p4, p5 = st.columns(5)
 
     if "sandbox_amt" not in st.session_state:
