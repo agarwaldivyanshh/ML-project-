@@ -6,7 +6,7 @@ roam controls, and responsive container resizing.
 
 import json
 import uuid
-import streamlit.components.v1 as components
+import streamlit as st
 
 def render_echarts(
     option: dict,
@@ -206,4 +206,7 @@ def render_echarts(
 
     height_int = int(height.replace("px", "").strip()) if "px" in height else 520
     # Add a small padding to iframe height to prevent any scrollbars
-    components.html(html_code, height=height_int + 10, scrolling=False)
+    if hasattr(st, "iframe"):
+        st.iframe(html_code, height=height_int + 10, width="stretch")
+    else:
+        st.components.v1.html(html_code, height=height_int + 10, scrolling=False)

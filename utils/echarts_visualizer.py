@@ -45,19 +45,20 @@ def get_echarts_graph_option(
     # -------------------------------------------------------------
     if scenario_id == "slide2_multi_hop_ring" or "ring" in scenario_id or "mule" in scenario_id:
         coords_map = {
-            "VICTIM_CORP_01": (70, 240, "Compromised Source", 56, "circle"),
-            "MULE_HOP_1":     (190, 150, "Layering Money Mule", 48, "circle"),
-            "MULE_HOP_2":     (310, 330, "Layering Money Mule", 48, "circle"),
-            "MULE_HOP_3":     (440, 150, "Layering Money Mule", 48, "circle"),
-            "MULE_HOP_4":     (570, 330, "Slide 2 Target ($4.5k)", 62, "circle"),
-            "MULE_HOP_5":     (700, 150, "Layering Money Mule", 48, "circle"),
-            "ATM_CASHOUT_77": (820, 240, "ATM Liquidation Point", 56, "roundRect"),
+            "VICTIM_CORP_01": (110, 260, "Compromised Source", 50, "circle"),
+            "MULE_HOP_1":     (205, 180, "Layering Money Mule", 44, "circle"),
+            "MULE_HOP_2":     (300, 340, "Layering Money Mule", 44, "circle"),
+            "MULE_HOP_3":     (395, 180, "Layering Money Mule", 44, "circle"),
+            "MULE_HOP_4":     (490, 340, "Slide 2 Target ($4.5k)", 54, "circle"),
+            "MULE_HOP_5":     (585, 180, "Layering Money Mule", 44, "circle"),
+            "ATM_CASHOUT_77": (680, 260, "ATM Liquidation Point", 50, "roundRect"),
         }
 
         for n in nodes_raw:
             nid = n.get("id", "")
-            x, y, cat, size, symbol = coords_map.get(nid, (450, 240, "Layering Money Mule", 48, "circle"))
+            x, y, cat, size, symbol = coords_map.get(nid, (400, 260, "Layering Money Mule", 44, "circle"))
             is_target = (nid == "MULE_HOP_4" or nid == highlight_node)
+            label_pos = "top" if y <= 190 else "bottom"
 
             node_item = {
                 "id": nid,
@@ -69,7 +70,7 @@ def get_echarts_graph_option(
                 "category": cat,
                 "label": {
                     "show": True,
-                    "position": "bottom",
+                    "position": label_pos,
                     "formatter": nid,
                     "color": "#0F172A",
                     "fontSize": 11,
@@ -146,9 +147,9 @@ def get_echarts_graph_option(
     # CASE B: Smurfing Fan-Out Scheme
     # -------------------------------------------------------------
     elif scenario_id == "smurfing_fan_out" or "smurf" in scenario_id:
-        hub_coords = (90, 250)
-        offshore_coords = (780, 250)
-        mule_y_positions = [60, 136, 212, 288, 364, 440]
+        hub_coords = (130, 250)
+        offshore_coords = (660, 250)
+        mule_y_positions = [95, 157, 219, 281, 343, 405]
 
         mule_nodes = [n for n in nodes_raw if "MULE" in n.get("id", "")]
         for idx, m in enumerate(mule_nodes):
@@ -157,19 +158,19 @@ def get_echarts_graph_option(
             echarts_nodes.append({
                 "id": nid,
                 "name": nid,
-                "x": 420,
+                "x": 400,
                 "y": y_pos,
                 "symbol": "circle",
-                "symbolSize": 44,
+                "symbolSize": 30,
                 "category": "Layering Money Mule",
                 "label": {
                     "show": True,
-                    "position": "left",
+                    "position": "top",
                     "formatter": nid,
                     "color": "#0F172A",
                     "fontSize": 11,
                     "fontWeight": 700,
-                    "distance": 8
+                    "distance": 3
                 },
                 "tooltip": {
                     "formatter": f"""
@@ -284,8 +285,8 @@ def get_echarts_graph_option(
     # CASE C: Legitimate Commercial Merchant
     # -------------------------------------------------------------
     else:
-        cust_positions = [(90, 120), (90, 240), (90, 360)]
-        outflow_positions = [(780, 160), (780, 320)]
+        cust_positions = [(140, 145), (140, 255), (140, 365)]
+        outflow_positions = [(660, 180), (660, 330)]
 
         cust_idx = 0
         out_idx = 0
@@ -296,12 +297,12 @@ def get_echarts_graph_option(
                 cust_idx += 1
                 cat = "Legitimate Customer"
                 symbol = "circle"
-                size = 46
+                size = 44
             elif "MERCHANT" in nid:
-                pos = (440, 240)
+                pos = (400, 255)
                 cat = "Verified Merchant"
                 symbol = "roundRect"
-                size = 62
+                size = 56
             else:
                 pos = outflow_positions[out_idx % len(outflow_positions)]
                 out_idx += 1

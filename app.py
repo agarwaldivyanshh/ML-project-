@@ -8,7 +8,6 @@ import pickle
 import numpy as np
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
 
 # ============================================================
 # PAGE CONFIGURATION - ENTERPRISE SAAS DASHBOARD
@@ -635,7 +634,7 @@ with tab_benchmarks:
         {"Model Architecture": "XGBoost (Tabular Baseline)", "PR-AUC": "0.841", "ROC-AUC": "0.945", "Precision": "0.852", "Recall": "0.830"},
         {"Model Architecture": "Random Forest (Tabular Control)", "PR-AUC": "0.762", "ROC-AUC": "0.912", "Precision": "0.781", "Recall": "0.745"}
     ])
-    st.dataframe(eval_table, hide_index=True, use_container_width=True)
+    st.dataframe(eval_table, hide_index=True, width="stretch")
 
 # ============================================================
 # TAB 3: PAYSIM GRAPH TOPOLOGY EXPLORER
@@ -692,27 +691,27 @@ with tab_sandbox:
     if "sandbox_spd_idx" not in st.session_state:
         st.session_state.sandbox_spd_idx = 0
 
-    if p1.button("Standard $4,500 (Illusion)", use_container_width=True):
+    if p1.button("Standard $4,500 (Illusion)", width="stretch"):
         st.session_state.sandbox_amt = 4500.0
         st.session_state.sandbox_mules_val = 4
         st.session_state.sandbox_spd_idx = 0
         st.rerun()
-    if p2.button("Micro $0.01 Transfer", use_container_width=True):
+    if p2.button("Micro $0.01 Transfer", width="stretch"):
         st.session_state.sandbox_amt = 0.01
         st.session_state.sandbox_mules_val = 3
         st.session_state.sandbox_spd_idx = 0
         st.rerun()
-    if p3.button("Whale $50M Transfer", use_container_width=True):
+    if p3.button("Whale $50M Transfer", width="stretch"):
         st.session_state.sandbox_amt = 50000000.0
         st.session_state.sandbox_mules_val = 5
         st.session_state.sandbox_spd_idx = 0
         st.rerun()
-    if p4.button("Zero $0.00 Transfer", use_container_width=True):
+    if p4.button("Zero $0.00 Transfer", width="stretch"):
         st.session_state.sandbox_amt = 0.0
         st.session_state.sandbox_mules_val = 0
         st.session_state.sandbox_spd_idx = 1
         st.rerun()
-    if p5.button("Clean Safe Merchant", use_container_width=True):
+    if p5.button("Clean Safe Merchant", width="stretch"):
         st.session_state.sandbox_amt = 1250.0
         st.session_state.sandbox_mules_val = 0
         st.session_state.sandbox_spd_idx = 1
